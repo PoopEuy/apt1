@@ -1,37 +1,35 @@
 "use strict";
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable("users", {
       id: {
-        type: Sequelize.INTEGER,
+        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        allowNull: false,
+        type: Sequelize.INTEGER,
       },
       user_name: {
-        type: Sequelize.STRING(30),
         allowNull: false,
+        type: Sequelize.STRING(30),
       },
       name: {
         type: Sequelize.STRING(30),
-        allowNull: false,
       },
       password: {
-        type: Sequelize.STRING,
         allowNull: false,
+        type: Sequelize.STRING,
       },
       role: {
-        type: Sequelize.STRING(6),
         allowNull: false,
+        type: Sequelize.STRING(6),
       },
       created_at: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
       updated_at: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
     });
     await queryInterface.addConstraint("users", {
@@ -40,7 +38,6 @@ module.exports = {
       name: "UNIQUE_USERS_NAME",
     });
   },
-
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable("users");
   },

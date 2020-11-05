@@ -1,73 +1,63 @@
 "use strict";
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable("nojs_users", {
       id: {
-        type: Sequelize.INTEGER,
+        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        allowNull: false,
+        type: Sequelize.INTEGER,
       },
       nojs: {
-        type: Sequelize.STRING(8),
         allowNull: false,
+        type: Sequelize.STRING,
       },
       site: {
-        type: Sequelize.STRING(20),
         allowNull: false,
+        type: Sequelize.STRING,
       },
       provinsi: {
-        type: Sequelize.STRING(20),
-        allowNull: true,
+        type: Sequelize.STRING,
       },
       lc: {
-        type: Sequelize.STRING(10),
         allowNull: false,
+        type: Sequelize.STRING,
       },
       mitra: {
-        type: Sequelize.STRING(10),
-        allowNull: false,
+        type: Sequelize.STRING,
       },
       ip: {
-        type: Sequelize.STRING(10),
         allowNull: false,
+        type: Sequelize.STRING,
       },
-      latitutde: {
-        type: Sequelize.STRING(20),
-        allowNull: true,
+      latitude: {
+        type: Sequelize.STRING,
       },
       longitude: {
-        type: Sequelize.STRING(20),
-        allowNull: true,
+        type: Sequelize.STRING,
       },
       id_lvd_vsat: {
         type: Sequelize.INTEGER,
-        allowNull: true,
       },
       id_ping: {
         type: Sequelize.INTEGER,
-        allowNull: true,
       },
       id_batt_volt: {
         type: Sequelize.INTEGER,
-        allowNull: true,
       },
       id_vsat_curr: {
         type: Sequelize.INTEGER,
-        allowNull: true,
       },
       id_bts_curr: {
         type: Sequelize.INTEGER,
-        allowNull: true,
       },
       created_at: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
       updated_at: {
-        type: Sequelize.DATE,
         allowNull: false,
+        type: Sequelize.DATE,
       },
     });
     await queryInterface.addConstraint("nojs_users", {
@@ -76,7 +66,6 @@ module.exports = {
       name: "UNIQUE_NOJS",
     });
   },
-
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable("nojs_users");
   },
