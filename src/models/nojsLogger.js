@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class NojsUser extends Model {
+  class NojsLogger extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,21 +11,18 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  NojsUser.init(
+  NojsLogger.init(
     {
-      nojs: DataTypes.STRING,
-      site: DataTypes.STRING,
-      provinsi: DataTypes.STRING,
-      lc: DataTypes.STRING,
-      mitra: DataTypes.STRING,
-      ip: DataTypes.STRING,
-      latitude: DataTypes.STRING,
-      longitude: DataTypes.STRING,
-      id_lvd_vsat: DataTypes.INTEGER,
-      id_ping: DataTypes.INTEGER,
-      id_batt_volt: DataTypes.INTEGER,
-      id_vsat_curr: DataTypes.INTEGER,
-      id_bts_curr: DataTypes.INTEGER,
+      ts: DataTypes.STRING,
+      nojs_id: DataTypes.INTEGER,
+      batt_volt: DataTypes.FLOAT,
+      dock_active: DataTypes.STRING,
+      load1: DataTypes.FLOAT,
+      load2: DataTypes.FLOAT,
+      dock_cell_id: DataTypes.INTEGER,
+      energy_id: DataTypes.INTEGER,
+      statistics_id: DataTypes.INTEGER,
+      pv_id: DataTypes.INTEGER,
       createdAt: {
         type: DataTypes.DATE,
         field: "created_at",
@@ -37,9 +34,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "nojsUserModel",
-      tableName: "nojs_users",
+      modelName: "nojsLoggerModel",
+      tableName: "nojs_loggers",
     }
   );
-  return NojsUser;
+  return NojsLogger;
 };
