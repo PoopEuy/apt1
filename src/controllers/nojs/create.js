@@ -61,7 +61,7 @@ module.exports = async (req, res) => {
   };
 
   const createdNojs = await nojsUserModel.create(data);
-  return res.json({
+  return res.status(201).json({
     status: "success",
     data: {
       id: createdNojs.id,

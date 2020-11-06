@@ -8,7 +8,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      NojsLogger.belongsTo(models.nojsUserModel, {
+        foreignKey: "nojs_id",
+        as: "nojs",
+      });
+      NojsLogger.belongsTo(models.dockCellModel, {
+        foreignKey: "dock_cell_id",
+        as: "dockCell",
+      });
     }
   }
   NojsLogger.init(
