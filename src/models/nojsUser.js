@@ -8,10 +8,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      NojsUser.belongsToMany(models.nojsLoggerModel, {
-        through: "nojs_logger",
-        foreignKey: "nojs_id",
-      });
+      // NojsUser.belongsToMany(models.nojsLoggerModel, {
+      //   through: "nojs_logger",
+      //   foreignKey: "nojs_id",
+      // });
+      // NojsUser.hasMany(models.nojsLoggerModel, { as: "loggers" });
     }
   }
   NojsUser.init(
