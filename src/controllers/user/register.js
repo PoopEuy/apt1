@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
   };
 
   const createdUser = await userModel.create(data);
-  return res.json({
+  return res.status(201).json({
     status: "success",
     data: {
       id: createdUser.id,
