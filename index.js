@@ -8,7 +8,7 @@ const energyRouter = require("./src/routes/energy");
 const dockCellRouter = require("./src/routes/dockCell");
 const pvRouter = require("./src/routes/pv");
 const statisticsRouter = require("./src/routes/statistics");
-const { nojsUserModel } = require("./src/models");
+const loggerRouter = require("./src/routes/logger");
 
 dotenv.config();
 
@@ -23,6 +23,7 @@ app.use("/api/energy", energyRouter);
 app.use("/api/dockcell", dockCellRouter);
 app.use("/api/pv", pvRouter);
 app.use("/api/statistics", statisticsRouter);
+app.use("/api/logger", loggerRouter);
 
 app.get("/", (req, res) => {
   res.send("OK");
@@ -31,7 +32,7 @@ app.get("/", (req, res) => {
 app.get("/test", (req, res) => {
   nojsLoggerModel
     .findAll({
-      include: ["nojs", "dockCell"],
+      include: ["nojs", "dockCell", "energy"],
     })
     .then((result) => {
       return res.json({
