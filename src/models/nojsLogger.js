@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "dock_cell_id",
         as: "dockCell",
       });
+      NojsLogger.belongsTo(models.energyModel, {
+        foreignKey: "energy_id",
+        as: "energy",
+      });
     }
   }
   NojsLogger.init(
