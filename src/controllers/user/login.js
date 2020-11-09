@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
     });
   }
 
-  res.json({
+  return res.status(200).json({
     status: "success",
     data: {
       id: user.id,

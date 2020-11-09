@@ -4,48 +4,50 @@ const dotenv = require("dotenv");
 
 const usersRouter = require("./src/routes/users");
 const nojsUsersRouter = require("./src/routes/nojs");
-const { Test } = require("./src/models");
+const energyRouter = require("./src/routes/energy");
+const dockCellRouter = require("./src/routes/dockCell");
+const pvRouter = require("./src/routes/pv");
+const statisticsRouter = require("./src/routes/statistics");
+const loggerRouter = require("./src/routes/logger");
+
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const { nojsLoggerModel } = require("./src/models");
 
 app.use(bodyParser.json());
 app.use("/api/users", usersRouter);
 app.use("/api/nojs", nojsUsersRouter);
+app.use("/api/energy", energyRouter);
+app.use("/api/dockcell", dockCellRouter);
+app.use("/api/pv", pvRouter);
+app.use("/api/statistics", statisticsRouter);
+app.use("/api/logger", loggerRouter);
 
 app.get("/", (req, res) => {
   res.send("OK");
 });
-app.post("/test", async (req, res) => {
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const email = req.body.email;
 
-  const user = await Test.findOne({
-    where: { email },
-  });
-  if (user) {
-    return res.status(409).json({
-      status: "error",
-      message: "Email already exist",
+app.get("/test", (req, res) => {
+  nojsLoggerModel
+    .findAll({
+      include: ["nojs", "dockCell", "energy"],
+    })
+    .then((result) => {
+      return res.json({
+        status: "success",
+        data: result,
+      });
+    })
+    .catch((err) => {
+      return res.json({
+        status: "error",
+        data: err,
+      });
     });
-  }
-
-  const data = {
-    firstName,
-    lastName,
-    email,
-  };
-
-  const createdUser = await Test.create(data);
-  return res.json({
-    status: "success",
-    data: {
-      id: createdUser.id,
-    },
-  });
 });
+
 app.listen(PORT, () =>
   console.log(`Server Running on : http://localhost:${PORT}`)
 );

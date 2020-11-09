@@ -1,26 +1,22 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Energy extends Model {
+  class Statistics extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // Energy.belongsToMany(models.nojsLoggerModel, {
-      //   through: "energy",
-      //   foreignKey: "energy_id",
-      // });
+      // define association here
     }
   }
-  Energy.init(
+  Statistics.init(
     {
-      edl1: DataTypes.FLOAT,
-      edl2: DataTypes.FLOAT,
-      eh1: DataTypes.FLOAT,
-      eh2: DataTypes.FLOAT,
-      eh3: DataTypes.FLOAT,
+      dock_max: DataTypes.INTEGER,
+      value_max: DataTypes.FLOAT,
+      dock_min: DataTypes.INTEGER,
+      value_min: DataTypes.FLOAT,
       createdAt: {
         type: DataTypes.DATE,
         field: "created_at",
@@ -32,9 +28,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "energyModel",
-      tableName: "energy",
+      modelName: "statisticsModel",
+      tableName: "statistics",
     }
   );
-  return Energy;
+  return Statistics;
 };

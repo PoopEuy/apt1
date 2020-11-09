@@ -8,7 +8,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // DockCell.belongsToMany(models.nojsLoggerModel, {
+      //   through: "nojs_logger",
+      //   foreignKey: "dock_cell_id",
+      // });
     }
   }
   DockCell.init(
@@ -40,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "dockModel",
+      modelName: "dockCellModel",
       tableName: "dock_cells",
     }
   );

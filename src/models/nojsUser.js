@@ -1,17 +1,21 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class nojsUser extends Model {
+  class NojsUser extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // NojsUser.belongsToMany(models.nojsLoggerModel, {
+      //   through: "nojs_logger",
+      //   foreignKey: "nojs_id",
+      // });
+      // NojsUser.hasMany(models.nojsLoggerModel, { as: "loggers" });
     }
   }
-  nojsUser.init(
+  NojsUser.init(
     {
       nojs: DataTypes.STRING,
       site: DataTypes.STRING,
@@ -41,5 +45,5 @@ module.exports = (sequelize, DataTypes) => {
       tableName: "nojs_users",
     }
   );
-  return nojsUser;
+  return NojsUser;
 };
