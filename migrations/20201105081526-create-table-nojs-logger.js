@@ -12,6 +12,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       nojs_id: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: "nojs_users",
