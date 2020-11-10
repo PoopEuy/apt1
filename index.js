@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
+const cors = require("cors");
 
 const usersRouter = require("./src/routes/users");
 const nojsUsersRouter = require("./src/routes/nojs");
@@ -16,7 +17,10 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const { nojsLoggerModel } = require("./src/models");
 
+app.use(cors());
 app.use(bodyParser.json());
+
+//route
 app.use("/api/users", usersRouter);
 app.use("/api/nojs", nojsUsersRouter);
 app.use("/api/energy", energyRouter);
