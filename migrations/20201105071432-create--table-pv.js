@@ -35,6 +35,19 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+
+    await queryInterface.bulkInsert("pv", [
+      {
+        pv1_curr: null,
+        pv1_volt: null,
+        pv2_curr: null,
+        pv2_volt: null,
+        pv3_curr: null,
+        pv3_volt: null,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+    ]);
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable("pv");

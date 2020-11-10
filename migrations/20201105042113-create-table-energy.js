@@ -32,6 +32,18 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+
+    await queryInterface.bulkInsert("energy", [
+      {
+        edl1: null,
+        edl2: null,
+        eh1: null,
+        eh2: null,
+        eh3: null,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+    ]);
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable("energy");

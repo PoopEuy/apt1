@@ -65,6 +65,29 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+
+    await queryInterface.bulkInsert("dock_cells", [
+      {
+        dock_1: null,
+        dock_2: null,
+        dock_3: null,
+        dock_4: null,
+        dock_5: null,
+        dock_6: null,
+        dock_7: null,
+        dock_8: null,
+        dock_9: null,
+        dock_10: null,
+        dock_11: null,
+        dock_12: null,
+        dock_13: null,
+        dock_14: null,
+        dock_15: null,
+        dock_16: null,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+    ]);
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable("dock_cells");

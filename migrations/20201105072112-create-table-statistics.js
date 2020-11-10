@@ -29,6 +29,17 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+
+    await queryInterface.bulkInsert("statistics", [
+      {
+        dock_max: null,
+        value_max: null,
+        dock_min: null,
+        value_min: null,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+    ]);
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable("statistics");
