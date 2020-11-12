@@ -19,9 +19,7 @@ module.exports = async (req, res) => {
     });
   }
 
-  const user = await userModel.findOne({
-    where: { user_name: userName },
-  });
+  const user = await userModel.findUser(userName);
 
   if (!user) {
     return res.status(404).json({

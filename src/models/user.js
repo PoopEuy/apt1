@@ -10,6 +10,14 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
+
+    static async findUser(user_name) {
+      return await User.findOne({
+        where: { user_name },
+      })
+        .then((e) => e)
+        .catch((err) => err);
+    }
   }
   User.init(
     {
