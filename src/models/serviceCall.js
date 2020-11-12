@@ -8,7 +8,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      ServiceCall.belongsTo(models.nojsUserModel, {
+        foreignKey: "nojs_id",
+        as: "nojs",
+      });
     }
   }
   ServiceCall.init(
