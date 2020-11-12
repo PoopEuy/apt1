@@ -11,18 +11,6 @@ const {
 const hexToBin = require("../../helpers/hexToBin");
 const now = require("../../helpers/dateTime");
 
-const createDockCell = async (data) => {
-  return await dockCellModel.create(data).then((result) => result.id);
-};
-const createEnergy = async (data) => {
-  return await energyModel.create(data).then((result) => result.id);
-};
-const createPv = async (data) => {
-  return await pvModel.create(data).then((result) => result.id);
-};
-const createStatistics = async (data) => {
-  return await statisticsModel.create(data).then((result) => result.id);
-};
 const findNojs = async (nojs) => {
   return await nojsUserModel
     .findOne({
@@ -104,17 +92,23 @@ const dataToFormatDb = async (datas) => {
 module.exports = async (req, res) => {
   let logger = [];
   const { status, nojs } = req.body;
-  const dataBody = await dataToFormatDb(req.body.data);
-  const nojs_id = await findNojs(nojs).then((e) => e);
+  const nojs_id = await findNojs(nojs).then((result) => result);
 
   if (status == "success") {
+    const dataBody = await dataToFormatDb(req.body.data);
     for (const el in dataBody) {
       if (dataBody.hasOwnProperty(el)) {
         const data = dataBody[el];
-        const dock_cell_id = await createDockCell(data.dock_cell);
-        const energy_id = await createEnergy(data.energy);
-        const pv_id = await createPv(data.pv);
-        const statistics_id = await createStatistics(data.statistics);
+        const dock_cell_id = await dockCellModel
+          .create(data.dock_cell)
+          .then((result) => result.id);
+        const energy_id = await energyModel
+          .create(data.energy)
+          .then((result) => result.id);
+        const pv_id = await pvModel.create(data.pv).then((result) => result.id);
+        const statistics_id = await statisticsModel
+          .create(data.statistics)
+          .then((result) => result.id);
         const dock_active = hexToBin(data.logger.dock_active);
         serviceCall(nojs_id, dock_active.off);
         logger.push({
@@ -128,15 +122,16 @@ module.exports = async (req, res) => {
       }
     }
   } else {
+    const dataBody = req.body.data[0];
+
     const dock_cell_id = 1;
     const energy_id = 1;
     const pv_id = 1;
     const statistics_id = 1;
-    const nojs_id = await findNojs(nojs).then((e) => e);
     serviceCall(nojs_id, 16);
 
     logger.push({
-      ...data[0].logger,
+      ...dataBody,
       dock_cell_id,
       energy_id,
       pv_id,
