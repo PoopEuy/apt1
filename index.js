@@ -10,6 +10,7 @@ const dockCellRouter = require("./src/routes/dockCell");
 const pvRouter = require("./src/routes/pv");
 const statisticsRouter = require("./src/routes/statistics");
 const loggerRouter = require("./src/routes/logger");
+const SericeCallRouter = require("./src/routes/serviceCall");
 
 dotenv.config();
 
@@ -18,7 +19,7 @@ const PORT = process.env.PORT || 5000;
 const { nojsLoggerModel } = require("./src/models");
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "100mb" }));
 
 //route
 app.use("/api/users", usersRouter);
@@ -28,6 +29,7 @@ app.use("/api/dockcell", dockCellRouter);
 app.use("/api/pv", pvRouter);
 app.use("/api/statistics", statisticsRouter);
 app.use("/api/logger", loggerRouter);
+app.use("/api/servicecall", SericeCallRouter);
 
 app.get("/", (req, res) => {
   res.send("OK");
