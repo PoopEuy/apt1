@@ -9,7 +9,7 @@ const {
 } = require("../../models");
 
 const hexToBin = require("../../helpers/hexToBin");
-const now = require("../../helpers/dateTime");
+const { now, tsFormater } = require("../../helpers/dateTime");
 
 const findNojs = async (nojs) => {
   return await nojsUserModel
@@ -113,6 +113,7 @@ module.exports = async (req, res) => {
         serviceCall(nojs_id, dock_active.off);
         logger.push({
           ...data.logger,
+          ts: tsFormater(data.logger.ts),
           dock_cell_id,
           energy_id,
           pv_id,
@@ -132,6 +133,7 @@ module.exports = async (req, res) => {
 
     logger.push({
       ...dataBody,
+      ts: tsFormater(dataBody.ts),
       dock_cell_id,
       energy_id,
       pv_id,
