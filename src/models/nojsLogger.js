@@ -1,25 +1,57 @@
 "use strict";
 const { Model } = require("sequelize");
+const { Op } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   class NojsLogger extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      NojsLogger.belongsTo(models.nojsUserModel, {
+      this.belongsTo(models.nojsUserModel, {
         foreignKey: "nojs_id",
         as: "nojs",
       });
-      NojsLogger.belongsTo(models.dockCellModel, {
+      this.belongsTo(models.dockCellModel, {
         foreignKey: "dock_cell_id",
         as: "dockCell",
       });
-      NojsLogger.belongsTo(models.energyModel, {
+      this.belongsTo(models.energyModel, {
         foreignKey: "energy_id",
         as: "energy",
       });
+      this.belongsTo(models.pvModel, {
+        foreignKey: "pv_id",
+        as: "pv",
+      });
+    }
+    static async noc(modeles, dateTime, nojs) {
+      return await this.findAll({
+        attributes: ["ts", "batt_volt", "dock_active"],
+        where: {
+          nojs_id: nojs,
+          ts: { [Op.between]: [dateTime.start, dateTime.end] },
+          batt_volt: { [Op.ne]: null },
+        },
+        include: [
+          {
+            model: modeles.energyModel,
+            as: "energy",
+          },
+          // {
+          //   model: modeles.nojsUserModel,
+          //   as: "nojs",
+          //   attributes: ["nojs"],
+          // },
+          // {
+          //   model: modeles.pvModel,
+          //   as: "pv",
+          // },
+        ],
+        order: [["ts", "DESC"]],
+      })
+        .then((result) => result)
+        .catch((err) => {
+          console.log(err);
+          return err;
+        });
     }
   }
   NojsLogger.init(

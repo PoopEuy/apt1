@@ -16,7 +16,6 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const { nojsLoggerModel } = require("./src/models");
 
 app.use(cors());
 app.use(bodyParser.json({ limit: "100mb" }));
@@ -31,28 +30,9 @@ app.use("/api/statistics", statisticsRouter);
 app.use("/api/logger", loggerRouter);
 app.use("/api/servicecall", SericeCallRouter);
 
-app.get("/", (req, res) => {
-  res.send("OK");
-});
-
-app.get("/test", (req, res) => {
-  nojsLoggerModel
-    .findAll({
-      include: ["nojs", "dockCell", "energy"],
-    })
-    .then((result) => {
-      return res.json({
-        status: "success",
-        data: result,
-      });
-    })
-    .catch((err) => {
-      return res.json({
-        status: "error",
-        data: err,
-      });
-    });
-});
+// app.get("/", (req, res) => {
+//   res.send("OK");
+// });
 
 app.listen(PORT, () =>
   console.log(`Server Running on : http://localhost:${PORT}`)
