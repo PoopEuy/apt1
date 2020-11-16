@@ -14,6 +14,42 @@ module.exports = (sequelize, DataTypes) => {
       // });
       // NojsUser.hasMany(models.nojsLoggerModel, { as: "loggers" });
     }
+
+    static attributes() {
+      return [
+        "id",
+        "nojs",
+        "site",
+        "provinsi",
+        "lc",
+        "mitra",
+        "ip",
+        "latitude",
+        "longitude",
+        "id_lvd_vsat",
+        "id_ping",
+        "id_batt_volt",
+        "id_vsat_curr",
+        "id_bts_curr",
+      ];
+    }
+
+    static async findId(id) {
+      return await this.findOne({
+        attributes: ["nojs"],
+        where: { id },
+      })
+        .then((result) => result)
+        .catch((err) => err);
+    }
+    static async findAllId(id) {
+      let temp = { attributes: this.attributes() };
+      id.length && (temp = { ...temp, id });
+      console.log(temp);
+      return await this.findAll(temp)
+        .then((result) => result)
+        .catch((err) => err);
+    }
   }
   NojsUser.init(
     {
