@@ -4,8 +4,9 @@
   "description": "Rest API, Project Bakti. EHUB V3",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sundaya Indonesia",
   "license": "ISC",

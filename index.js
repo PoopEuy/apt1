@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(bodyParser.json({ limit: "100mb" }));
-
+app.use(express.urlencoded({ extended: true }));
 //route
 app.use("/api/users", usersRouter);
 app.use("/api/nojs", nojsUsersRouter);
@@ -32,9 +32,9 @@ app.use("/api/logger", loggerRouter);
 app.use("/api/servicecall", SericeCallRouter);
 app.use("/api/raspi", queuRaspi);
 
-// app.get("/", (req, res) => {
-//   res.send("OK");
-// });
+app.get("/", (req, res) => {
+  res.send("OK");
+});
 
 app.listen(PORT, () =>
   console.log(`Server Running on : http://localhost:${PORT}`)

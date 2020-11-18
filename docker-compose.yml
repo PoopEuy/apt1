@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./ :/usr/src/app
+      - /usr/src/app/node_modules # anonymous volume for node_modules only
+    ports:
+      - 5000:5000
+    networks:
+      - apt2
+
+  db:
+    image: postgres:12.0-alpine
+    restart: always
+    volumes:
+      - apt2_data:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+    env_file:
+      - ./.env
+    networks:
+      - apt2
+
+networks:
+  apt2:
+
+volumes:
+  apt2_data:
