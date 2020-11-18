@@ -1,5 +1,5 @@
 "use strict";
-
+require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
 const Sequelize = require("sequelize");
@@ -32,8 +32,6 @@ fs.readdirSync(__dirname)
       Sequelize.DataTypes
     );
     db[model.name] = model;
-
-    console.log(model);
   });
 
 Object.keys(db).forEach((modelName) => {
