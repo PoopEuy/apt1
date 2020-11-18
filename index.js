@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const cors = require("cors");
 
-const usersRouter = require("./src/routes/users");
+// const usersRouter = require("./src/routes/users");
 const nojsUsersRouter = require("./src/routes/nojs");
 const energyRouter = require("./src/routes/energy");
 const dockCellRouter = require("./src/routes/dockCell");
@@ -22,7 +22,7 @@ app.use(cors());
 app.use(bodyParser.json({ limit: "100mb" }));
 app.use(express.urlencoded({ extended: true }));
 //route
-app.use("/api/users", usersRouter);
+// app.use("/api/users", usersRouter);
 app.use("/api/nojs", nojsUsersRouter);
 app.use("/api/energy", energyRouter);
 app.use("/api/dockcell", dockCellRouter);
