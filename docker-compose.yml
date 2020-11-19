@@ -6,10 +6,10 @@ services:
       context: .
       dockerfile: ./Dockerfile
     volumes:
-      - ./ :/usr/src/app
-      - /usr/src/app/node_modules # anonymous volume for node_modules only
+      - ./:/usr/src/app
+      - node_modules:/usr/src/app/node_modules # anonymous volume for node_modules only
     ports:
-      - 5000:5000
+      - "${PORT}:${PORT}"
     networks:
       - apt2
 
@@ -19,7 +19,7 @@ services:
     volumes:
       - apt2_data:/var/lib/postgresql/data
     ports:
-      - 5433:5432
+      - "${DB_PORT_EXPOSE}:5432"
     env_file:
       - ./.env
     networks:
@@ -30,3 +30,4 @@ networks:
 
 volumes:
   apt2_data:
+  node_modules:
