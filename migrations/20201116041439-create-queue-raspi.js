@@ -23,6 +23,32 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+    await queryInterface.bulkInsert("queue_raspis", [
+      {
+        name: "site1",
+        status: false,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        name: "site2",
+        status: false,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        name: "site3",
+        status: false,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        name: "site4",
+        status: false,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+    ]);
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable("queue_raspis");
