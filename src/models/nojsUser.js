@@ -45,6 +45,13 @@ module.exports = (sequelize, DataTypes) => {
     static async findAllId(id) {
       let temp = { attributes: this.attributes() };
       id.length && (temp = { ...temp, id });
+      return await this.findAll(temp)
+        .then((result) => result)
+        .catch((err) => err);
+    }
+    static async findlc(lc) {
+      let temp = { attributes: this.attributes() };
+      temp = { ...temp, where: { lc } };
       console.log(temp);
       return await this.findAll(temp)
         .then((result) => result)
