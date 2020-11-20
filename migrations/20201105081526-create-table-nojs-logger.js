@@ -24,6 +24,9 @@ module.exports = {
       batt_volt: {
         type: Sequelize.FLOAT,
       },
+      cpu_temp: {
+        type: Sequelize.FLOAT,
+      },
       dock_active: {
         type: Sequelize.STRING,
       },

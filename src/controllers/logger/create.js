@@ -56,6 +56,7 @@ const dataToFormatDb = async (datas) => {
     const logger = {
       batt_volt: el.batt_volt,
       dock_active: el.dock_active,
+      cpu_temp: el.cpu_temp,
       load1: el.load1,
       load2: el.load2,
       ts: el.ts,

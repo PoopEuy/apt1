@@ -59,6 +59,7 @@ module.exports = (sequelize, DataTypes) => {
       ts: DataTypes.STRING,
       nojs_id: DataTypes.INTEGER,
       batt_volt: DataTypes.FLOAT,
+      cpu_temp: DataTypes.FLOAT,
       dock_active: DataTypes.STRING,
       load1: DataTypes.FLOAT,
       load2: DataTypes.FLOAT,
