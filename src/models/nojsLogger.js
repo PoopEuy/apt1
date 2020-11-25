@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         where: {
           nojs_id: nojs,
           ts: { [Op.between]: [dateTime.start, dateTime.end] },
-          batt_volt: { [Op.ne]: null },
+          energy_id: { [Op.ne]: 1 },
         },
         include: [
           {
