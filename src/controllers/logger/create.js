@@ -16,7 +16,7 @@ const findNojs = async (nojs) => {
     .findOne({
       where: { nojs },
     })
-    .then((result) => result.id)
+    .then((result) => (result ? result.id : result))
     .catch((err) => err);
 };
 const serviceCall = async (nojsId, value) => {
@@ -94,6 +94,12 @@ module.exports = async (req, res) => {
   let logger = [];
   const { status, nojs } = req.body;
   const nojs_id = await findNojs(nojs).then((result) => result);
+  if (!nojs_id) {
+    return res.status(404).json({
+      status: "error",
+      message: "Nojs Not Found",
+    });
+  }
 
   if (status == "success") {
     const dataBody = await dataToFormatDb(req.body.data);
