@@ -35,11 +35,11 @@ const nocDataChart = (now, next) => {
     batt_volt: now.batt_volt,
     dock_active: now.dock_active,
     pms: now.pms,
-    edl1: now.edl1 - next.edl1,
-    edl2: now.edl2 - next.edl2,
-    eh1: now.eh1 - next.eh1,
-    eh2: now.eh2 - next.eh2,
-    eh3: now.eh3 - next.eh3,
+    edl1: now.edl1,
+    edl2: now.edl2,
+    eh1: now.eh1,
+    eh2: now.eh2,
+    eh3: now.eh3,
   };
 };
 
