@@ -9,13 +9,13 @@ module.exports = async (req, res) => {
   const lc = req.body.lc;
   const mitra = req.body.mitra;
   const ip = req.body.ip;
-  const latitutde = req.body.latitutde;
+  const latitude = req.body.latitude;
   const longitude = req.body.longitude;
-  const id_lvd_vsat = req.body.id_lvd_vsat;
-  const id_ping = req.body.id_ping;
-  const id_batt_volt = req.body.id_batt_volt;
-  const id_vsat_curr = req.body.id_vsat_curr;
-  const id_bts_curr = req.body.id_bts_curr;
+  const id_lvd_vsat = req.body.id_lvdvsat == "" ? null : req.body.id_lvdvsat;
+  const id_ping = req.body.id_ping == "" ? null : req.body.id_ping;
+  const id_batt_volt = req.body.id_battvolt == "" ? null : req.body.id_battvolt;
+  const id_vsat_curr = req.body.id_vsatcurr == "" ? null : req.body.id_vsatcurr;
+  const id_bts_curr = req.body.id_btscurr == "" ? null : req.body.id_btscurr;
 
   const schema = {
     nojs: "string|empty:false",
@@ -51,7 +51,7 @@ module.exports = async (req, res) => {
     lc,
     mitra,
     ip,
-    latitutde,
+    latitude,
     longitude,
     id_lvd_vsat,
     id_ping,
@@ -59,7 +59,7 @@ module.exports = async (req, res) => {
     id_vsat_curr,
     id_bts_curr,
   };
-
+  console.log(data);
   const createdNojs = await nojsUserModel.create(data);
   return res.status(201).json({
     status: "success",
