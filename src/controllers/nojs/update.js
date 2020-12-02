@@ -17,21 +17,7 @@ module.exports = async (req, res) => {
   const id_batt_volt = req.body.id_batvolt == "" ? null : req.body.id_batvolt;
   const id_vsat_curr = req.body.id_vsatcurr == "" ? null : req.body.id_vsatcurr;
   const id_bts_curr = req.body.id_btscurr == "" ? null : req.body.id_btscurr;
-  console.log({
-    nojs,
-    site,
-    provinsi,
-    lc,
-    mitra,
-    ip,
-    latitude,
-    longitude,
-    id_lvd_vsat,
-    id_ping,
-    id_batt_volt,
-    id_vsat_curr,
-    id_bts_curr,
-  });
+
   const schema = {
     nojs: "string|empty:false",
     site: "string|empty:false",

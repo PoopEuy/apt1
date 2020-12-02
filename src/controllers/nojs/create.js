@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
   const longitude = req.body.longitude;
   const id_lvd_vsat = req.body.id_lvdvsat == "" ? null : req.body.id_lvdvsat;
   const id_ping = req.body.id_ping == "" ? null : req.body.id_ping;
-  const id_batt_volt = req.body.id_battvolt == "" ? null : req.body.id_battvolt;
+  const id_batt_volt = req.body.id_batvolt == "" ? null : req.body.id_batvolt;
   const id_vsat_curr = req.body.id_vsatcurr == "" ? null : req.body.id_vsatcurr;
   const id_bts_curr = req.body.id_btscurr == "" ? null : req.body.id_btscurr;
 
@@ -59,8 +59,9 @@ module.exports = async (req, res) => {
     id_vsat_curr,
     id_bts_curr,
   };
-  console.log(data);
+
   const createdNojs = await nojsUserModel.create(data);
+
   return res.status(201).json({
     status: "success",
     data: {
