@@ -1,7 +1,7 @@
 const hexToBin = require("./hexToBin");
 
 const formaterNoc = (data) => {
-  const dockActive = hexToBin(data.dock_active);
+  const dockActive = hexToBin(data.dock_active) || null;
   return {
     ts: data.ts,
     batt_volt: data.batt_volt,
@@ -29,7 +29,7 @@ const formaterNocError = (ts) => {
   };
 };
 
-const nocDataChart = (now, next) => {
+const nocDataChart = (now) => {
   return {
     ts: now.ts,
     batt_volt: now.batt_volt,

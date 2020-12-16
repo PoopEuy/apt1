@@ -53,6 +53,36 @@ module.exports = (sequelize, DataTypes) => {
           return err;
         });
     }
+    static async nocSingle(modeles, nojs) {
+      return await this.findAll({
+        attributes: ["ts", "batt_volt", "dock_active"],
+        where: {
+          nojs_id: nojs,
+        },
+        include: [
+          {
+            model: modeles.energyModel,
+            as: "energy",
+          },
+          // {
+          //   model: modeles.nojsUserModel,
+          //   as: "nojs",
+          //   attributes: ["nojs"],
+          // },
+          // {
+          //   model: modeles.pvModel,
+          //   as: "pv",
+          // },
+        ],
+        order: [["ts", "DESC"]],
+        limit: 1,
+      })
+        .then((result) => result)
+        .catch((err) => {
+          console.log("err");
+          return err;
+        });
+    }
   }
   NojsLogger.init(
     {
