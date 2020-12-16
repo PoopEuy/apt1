@@ -7,14 +7,14 @@ const {
 } = require("../../helpers/dataFormaterNOC");
 
 module.exports = async (req, res) => {
-  // const dateTime = {
-  //   start: minusHour(4),
-  //   end: now(),
-  // };
   const dateTime = {
-    start: "2020-12-02 10:55:04",
-    end: "2020-12-02 14:55:04",
+    start: minusHour(4),
+    end: now(),
   };
+  // const dateTime = {
+  //   start: "2020-12-02 10:55:04",
+  //   end: "2020-12-02 14:55:04",
+  // };
   const nojs = req.query.nojs;
   const single = req.query.single;
   if (!nojs) {
