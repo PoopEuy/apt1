@@ -12,6 +12,7 @@ const statisticsRouter = require("./src/routes/statistics");
 const loggerRouter = require("./src/routes/logger");
 const SericeCallRouter = require("./src/routes/serviceCall");
 const queuRaspi = require("./src/routes/queuRaspi");
+const statusProgramRouter = require("./src/routes/statusProgram");
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use("/api/statistics", statisticsRouter);
 app.use("/api/logger", loggerRouter);
 app.use("/api/servicecall", SericeCallRouter);
 app.use("/api/raspi", queuRaspi);
+app.use("/api/statusprogram", statusProgramRouter);
 
 app.get("/", (req, res) => {
   res.send("OK");
