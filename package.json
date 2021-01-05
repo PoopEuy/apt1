@@ -1,5 +1,5 @@
 {
-  "name": "apt2",
+  "name": "apt",
   "version": "1.0.0",
   "description": "Rest API, Project Bakti. EHUB V3",
   "main": "index.js",
