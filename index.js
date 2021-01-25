@@ -14,6 +14,7 @@ const SericeCallRouter = require("./src/routes/serviceCall");
 const queuRaspi = require("./src/routes/queuRaspi");
 const statusProgramRouter = require("./src/routes/statusProgram");
 const capacityRouter = require("./src/routes/capacity");
+const vendorsRouter = require("./src/routes/vendors");
 
 dotenv.config();
 
@@ -35,6 +36,7 @@ app.use("/api/servicecall", SericeCallRouter);
 app.use("/api/raspi", queuRaspi);
 app.use("/api/statusprogram", statusProgramRouter);
 app.use("/api/capacity", capacityRouter);
+app.use("/api/vendors", vendorsRouter);
 
 app.get("/", (req, res) => {
   res.send("OK");
