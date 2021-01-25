@@ -12,17 +12,20 @@ module.exports = async (req, res) => {
   const ip = req.body.ip;
   const latitude = req.body.latitude;
   const longitude = req.body.longitude;
-  const id_lvd_vsat = req.body.id_lvdvsat == "" ? null : req.body.id_lvdvsat;
-  const id_ping = req.body.id_ping == "" ? null : req.body.id_ping;
-  const id_batt_volt = req.body.id_batvolt == "" ? null : req.body.id_batvolt;
-  const id_vsat_curr = req.body.id_vsatcurr == "" ? null : req.body.id_vsatcurr;
-  const id_bts_curr = req.body.id_btscurr == "" ? null : req.body.id_btscurr;
+  const id_lvd_vsat = req.body.id_lvd_vsat;
+  const id_ping = req.body.id_ping;
+  const id_batt_volt = req.body.id_batt_volt;
+  const id_vsat_curr = req.body.id_vsat_curr;
+  const id_bts_curr = req.body.id_bts_curr;
+  const gs = req.body.gs;
+  const darat = req.body.darat;
+  const laut = req.body.laut;
+  const udara = req.body.udara;
 
   const schema = {
     nojs: "string|empty:false",
     site: "string|empty:false",
     lc: "string|empty:false",
-    mitra: "string|empty:false",
     ip: "string|empty:false",
   };
 
@@ -56,6 +59,10 @@ module.exports = async (req, res) => {
     id_batt_volt,
     id_vsat_curr,
     id_bts_curr,
+    gs,
+    darat,
+    laut,
+    udara,
   });
 
   return res.json({
@@ -74,6 +81,9 @@ module.exports = async (req, res) => {
       id_batt_volt,
       id_vsat_curr,
       id_bts_curr,
+      darat,
+      laut,
+      udara,
     },
   });
 };

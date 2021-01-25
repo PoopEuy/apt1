@@ -16,6 +16,10 @@ module.exports = async (req, res) => {
   const id_batt_volt = req.body.id_batvolt;
   const id_vsat_curr = req.body.id_vsatcurr;
   const id_bts_curr = req.body.id_btscurr;
+  const gs = req.body.gs;
+  const darat = req.body.darat;
+  const laut = req.body.laut;
+  const udara = req.body.udara;
 
   const schema = {
     nojs: "string|empty:false",
@@ -57,6 +61,10 @@ module.exports = async (req, res) => {
     id_batt_volt,
     id_vsat_curr,
     id_bts_curr,
+    gs,
+    darat,
+    laut,
+    udara,
   };
 
   const createdNojs = await nojsUserModel.create(data);

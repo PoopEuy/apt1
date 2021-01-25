@@ -31,6 +31,10 @@ module.exports = (sequelize, DataTypes) => {
         "id_batt_volt",
         "id_vsat_curr",
         "id_bts_curr",
+        "gs",
+        "darat",
+        "laut",
+        "udara",
       ];
     }
 
@@ -72,7 +76,9 @@ module.exports = (sequelize, DataTypes) => {
       id_ping: DataTypes.INTEGER,
       id_batt_volt: DataTypes.INTEGER,
       id_vsat_curr: DataTypes.INTEGER,
-      id_bts_curr: DataTypes.INTEGER,
+      darat: DataTypes.STRING,
+      laut: DataTypes.STRING,
+      udara: DataTypes.STRING,
       createdAt: {
         type: DataTypes.DATE,
         field: "created_at",
