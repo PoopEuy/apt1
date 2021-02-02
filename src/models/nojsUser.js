@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
 
     static async findId(id) {
       return await this.findOne({
-        attributes: ["nojs"],
+        attributes: ["nojs", "lc", "site"],
         where: { id },
       })
         .then((result) => result)

@@ -15,6 +15,8 @@ const queuRaspi = require("./src/routes/queuRaspi");
 const statusProgramRouter = require("./src/routes/statusProgram");
 const capacityRouter = require("./src/routes/capacity");
 const vendorsRouter = require("./src/routes/vendors");
+const ticketRouter = require("./src/routes/ticket");
+const progressRouter = require("./src/routes/progress");
 
 dotenv.config();
 
@@ -37,6 +39,8 @@ app.use("/api/raspi", queuRaspi);
 app.use("/api/statusprogram", statusProgramRouter);
 app.use("/api/capacity", capacityRouter);
 app.use("/api/vendors", vendorsRouter);
+app.use("/api/ticket", ticketRouter);
+app.use("/api/progress", progressRouter);
 
 app.get("/", (req, res) => {
   res.send("OK");
