@@ -34,5 +34,32 @@ const tsFormater = (n) => {
     11
   )}:${n.slice(11, 13)}:${n.slice(13, 15)}`;
 };
+const millisToSec = (ts1, ts2) => {
+  const date1 = new Date(ts1);
+  const date2 = new Date(ts2);
+  return (date2 - date1) / 1000;
+};
 
-module.exports = { now, tsFormater, minusHour, millisToMinutes, dateFormater };
+const secToString = (sec) => {
+  let msec = sec;
+  let day = Math.floor(msec / 60 / 60 / 24);
+  msec -= day * 60 * 60 * 24;
+  let hh = Math.floor(msec / 60 / 60);
+  msec -= hh * 60 * 60;
+  let mm = Math.floor(msec / 60);
+  msec -= mm * 60;
+  let ss = Math.floor(msec);
+
+  return day > 0
+    ? `${pad(day)}d ${pad(hh)}h ${pad(mm)}m ${pad(ss)}s`
+    : `${pad(hh)}h ${pad(mm)}m ${pad(ss)}s`;
+};
+module.exports = {
+  now,
+  tsFormater,
+  minusHour,
+  millisToMinutes,
+  dateFormater,
+  millisToSec,
+  secToString,
+};

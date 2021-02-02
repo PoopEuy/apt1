@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         as: "pv",
       });
     }
+
     static async noc(modeles, dateTime, nojs) {
       return await this.findAll({
         attributes: ["ts", "batt_volt", "dock_active"],
@@ -53,6 +54,7 @@ module.exports = (sequelize, DataTypes) => {
           return err;
         });
     }
+
     static async nocSingle(modeles, nojs) {
       return await this.findAll({
         attributes: ["ts", "batt_volt", "dock_active"],
@@ -80,6 +82,37 @@ module.exports = (sequelize, DataTypes) => {
         .then((result) => result)
         .catch((err) => {
           console.log("err");
+          return err;
+        });
+    }
+
+    static async sla(modeles, dateTime, nojs) {
+      return await this.findAll({
+        attributes: ["ts", "batt_volt", "dock_active", "load1", "load2"],
+        where: {
+          nojs_id: nojs,
+          ts: { [Op.between]: [dateTime.start, dateTime.end] },
+          energy_id: { [Op.ne]: 1 },
+        },
+        include: [
+          {
+            model: modeles.energyModel,
+            as: "energy",
+          },
+        ],
+        order: [["ts", "ASC"]],
+      })
+        .then((result) => {
+          const seen = new Set();
+          const filteredArr = result.filter((el) => {
+            const duplicate = seen.has(el.ts);
+            seen.add(el.ts);
+            return !duplicate;
+          });
+          return filteredArr;
+        })
+        .catch((err) => {
+          console.log(err);
           return err;
         });
     }
