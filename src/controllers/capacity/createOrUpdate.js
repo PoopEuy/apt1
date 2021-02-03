@@ -8,16 +8,22 @@ module.exports = async (req, res) => {
   });
 
   if (nojs) {
-    await nojs.update({
-      nojs_id,
-      disk_free,
-      disk_total,
-      disk_used,
-      free_ram,
-    });
+    if (disk_free) {
+      await nojs.update({
+        nojs_id,
+        disk_free,
+        disk_total,
+        disk_used,
+        free_ram,
+      });
+      return res.status(202).json({
+        status: "success",
+        message: "data update",
+      });
+    }
     return res.status(202).json({
       status: "success",
-      message: "data update",
+      message: "data null",
     });
   }
 
