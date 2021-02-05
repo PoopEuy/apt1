@@ -1,5 +1,6 @@
 const { millisToSec, secToString } = require("./dateTime");
 const hexToBin = require("./hexToBin");
+const group = require("./group");
 
 const formaterSla = (data) => {
   const dockActive = hexToBin(data.dock_active) || null;
@@ -23,7 +24,14 @@ const average = (arr, param, fix = 0) => {
   ).toFixed(fix);
 };
 
-const sla = (datas, date) => {
+const sum = (arr, param, fix = 0) => {
+  return arr
+    .map((val) => val[param])
+    .reduce((acc, val) => acc + val, 0)
+    .toFixed(fix);
+};
+
+const dataMaping = (datas, date) => {
   let uptime = 0;
   let result = [];
   let totalDateSec = millisToSec(date.start, date.end);
@@ -36,22 +44,53 @@ const sla = (datas, date) => {
     result.push(res);
   }
   const uptimePercent = ((uptime / totalDateSec) * 100).toFixed(2);
-  // console.log(totalDateSec - uptime);
   const avg = {
     up_time: secToString(uptime),
     unknown_time: secToString(totalDateSec - uptime),
     up_persentase: `${uptimePercent}%`,
     unknown_persentase: `${(100 - uptimePercent).toFixed(2)}%`,
-    eh1: average(result, "eh1"),
-    eh2: average(result, "eh2"),
-    eh3: average(result, "eh3"),
+    eh1: sum(result, "eh1"),
+    eh2: sum(result, "eh2"),
+    eh3: sum(result, "eh3"),
     batt_volt: average(result, "batt_volt", 2),
-    edl1: average(result, "edl1"),
-    edl2: average(result, "edl2"),
+    edl1: sum(result, "edl1"),
+    edl2: sum(result, "edl2"),
     vsat_curr: average(result, "vsat_curr", 2),
     bts_curr: average(result, "bts_curr", 2),
+    duration: uptime,
+    secend: totalDateSec,
   };
   return { avg, log: result, duration: uptime };
 };
 
-module.exports = { sla };
+const sla = (datas, date) => {
+  return dataMaping(datas, date);
+};
+
+const sla2 = (datas, date, nojs) => {
+  const data = dataMaping(datas, date);
+  const fiveMinutestoDaily = group(data.log);
+  const dailys = [];
+  fiveMinutestoDaily.forEach((log) => {
+    const duration = sum(log.data, "duration");
+    const newData = {
+      nojs: nojs.nojs,
+      site: nojs.site,
+      date: log.date,
+      up_time: secToString(duration),
+      batt_volt: average(log.data, "batt_volt", 2),
+      vsat_curr: average(log.data, "vsat_curr", 2),
+      bts_curr: average(log.data, "bts_curr", 2),
+      eh1: sum(log.data, "eh1"),
+      eh2: sum(log.data, "eh2"),
+      eh3: sum(log.data, "eh3"),
+      edl1: sum(log.data, "edl1") * -1,
+      edl2: sum(log.data, "edl2"),
+      // duration,
+    };
+    dailys.push(newData);
+  });
+  return dailys;
+};
+
+module.exports = { sla, sla2 };
