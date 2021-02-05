@@ -84,7 +84,7 @@ const sla2 = (datas, date, nojs) => {
       eh1: sum(log.data, "eh1"),
       eh2: sum(log.data, "eh2"),
       eh3: sum(log.data, "eh3"),
-      edl1: sum(log.data, "edl1") * -1,
+      edl1: sum(log.data, "edl1"),
       edl2: sum(log.data, "edl2"),
       // duration,
     };
