@@ -17,6 +17,7 @@ const capacityRouter = require("./src/routes/capacity");
 const vendorsRouter = require("./src/routes/vendors");
 const ticketRouter = require("./src/routes/ticket");
 const progressRouter = require("./src/routes/progress");
+const cutoffRouter = require("./src/routes/cutoff");
 
 dotenv.config();
 
@@ -41,6 +42,7 @@ app.use("/api/capacity", capacityRouter);
 app.use("/api/vendors", vendorsRouter);
 app.use("/api/ticket", ticketRouter);
 app.use("/api/progress", progressRouter);
+app.use("/api/cutoff", cutoffRouter);
 
 app.get("/", (req, res) => {
   res.send("OK");
