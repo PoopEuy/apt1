@@ -12,16 +12,16 @@ module.exports = {
         type: Sequelize.STRING(20),
       },
       vsat_off: {
-        type: Sequelize.INTEGER(3),
+        type: Sequelize.FLOAT,
       },
       vsat_on: {
-        type: Sequelize.INTEGER(3),
+        type: Sequelize.FLOAT,
       },
       bts_off: {
-        type: Sequelize.INTEGER(3),
+        type: Sequelize.FLOAT,
       },
       bts_on: {
-        type: Sequelize.INTEGER(3),
+        type: Sequelize.FLOAT,
       },
       createdAt: {
         allowNull: false,

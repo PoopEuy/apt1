@@ -14,10 +14,10 @@ module.exports = (sequelize, DataTypes) => {
   Cutoff.init(
     {
       site: DataTypes.STRING,
-      vsat_off: DataTypes.INTEGER,
-      vsat_on: DataTypes.INTEGER,
-      bts_off: DataTypes.INTEGER,
-      bts_on: DataTypes.INTEGER,
+      vsat_off: DataTypes.FLOAT,
+      vsat_on: DataTypes.FLOAT,
+      bts_off: DataTypes.FLOAT,
+      bts_on: DataTypes.FLOAT,
     },
     {
       sequelize,
