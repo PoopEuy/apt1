@@ -40,10 +40,19 @@ const dataMaping = (datas, date) => {
     const tempTs = datas[i + 1] ? datas[i + 1].ts : res.ts;
     const second = millisToSec(res.ts, tempTs);
     uptime += second;
-    res = { ...res, duration: second > 300 ? 300 : second, real: second };
+    const lvd1 = res.vsat_curr > 0 ? res.batt_volt : 0;
+    const lvd2 = res.bts_curr > 0 ? res.batt_volt : 0;
+    res = {
+      ...res,
+      lvd1,
+      lvd2,
+      duration: second > 300 ? 300 : second,
+      real: second,
+    };
     result.push(res);
   }
   const uptimePercent = ((uptime / totalDateSec) * 100).toFixed(2);
+  const sumBattVolt = sum(result, "batt_volt");
   const avg = {
     up_time: secToString(uptime),
     unknown_time: secToString(totalDateSec - uptime),
@@ -60,7 +69,7 @@ const dataMaping = (datas, date) => {
     duration: uptime,
     secend: totalDateSec,
   };
-  return { avg, log: result, duration: uptime };
+  return { avg, log: result, duration: uptime, sumBattVolt };
 };
 
 const sla = (datas, date) => {
