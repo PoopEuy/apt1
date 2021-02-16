@@ -55,7 +55,7 @@ const secToString = (sec) => {
     : `${pad(hh)}h ${pad(mm)}m ${pad(ss)}s`;
 };
 
-const monthFormater = () => {
+const monthFormater = (string) => {
   const month = [
     "January",
     "February",
@@ -70,7 +70,7 @@ const monthFormater = () => {
     "November",
     "December",
   ];
-  const date = new Date("2020-12-01 00:00:00");
+  const date = new Date(string);
   return `${month[date.getMonth()]} ${date.getFullYear()}`;
 };
 

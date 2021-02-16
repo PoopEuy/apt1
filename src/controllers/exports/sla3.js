@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
             "Content-Disposition",
             `attachment; filename=${dataNojs.site}.xlsx`
           );
-          return wb.xlsx.write(res).then(function () {
+          return wb.xlsx.write(res).then(() => {
             res.status(200).end();
           });
         })
