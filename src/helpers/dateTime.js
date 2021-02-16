@@ -54,6 +54,26 @@ const secToString = (sec) => {
     ? `${pad(day)}d ${pad(hh)}h ${pad(mm)}m ${pad(ss)}s`
     : `${pad(hh)}h ${pad(mm)}m ${pad(ss)}s`;
 };
+
+const monthFormater = () => {
+  const month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const date = new Date("2020-12-01 00:00:00");
+  return `${month[date.getMonth()]} ${date.getFullYear()}`;
+};
+
 module.exports = {
   now,
   tsFormater,
@@ -62,4 +82,5 @@ module.exports = {
   dateFormater,
   millisToSec,
   secToString,
+  monthFormater,
 };
