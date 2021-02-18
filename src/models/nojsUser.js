@@ -76,6 +76,7 @@ module.exports = (sequelize, DataTypes) => {
       id_ping: DataTypes.INTEGER,
       id_batt_volt: DataTypes.INTEGER,
       id_vsat_curr: DataTypes.INTEGER,
+      gs: DataTypes.INTEGER,
       darat: DataTypes.STRING,
       laut: DataTypes.STRING,
       udara: DataTypes.STRING,
