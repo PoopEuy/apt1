@@ -4,7 +4,7 @@ const download = require("../../helpers/excel/sla3");
 const { monthFormater } = require("../../helpers/dateTime");
 
 module.exports = async (req, res) => {
-  const { nojs, start, end, apt1v3 } = req.query;
+  const { nojs, start, end, apt2 } = req.query;
 
   if (!nojs) {
     return res.status(404).json({
@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
             uptime: data.duration,
             sumVolt: data.sumBattVolt,
             date: monthFormater(start),
-            v3: apt1v3 && apt1v3 == "true" ? true : false,
+            v3: apt2 && apt2 == "true" ? true : false,
           });
 
           res.setHeader(

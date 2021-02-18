@@ -3,7 +3,7 @@ const Excel = require("exceljs");
 module.exports = ({ log, site, uptime, sumVolt, v3, date }) => {
   const workbook = new Excel.Workbook();
 
-  const worksheet = workbook.addWorksheet(site);
+  const worksheet = workbook.addWorksheet(site.toUpperCase());
   const columns = [
     { header: "Date Time", key: "ts", width: 23 },
     { header: "Eh1", key: "eh1", width: 12 },
@@ -68,6 +68,8 @@ module.exports = ({ log, site, uptime, sumVolt, v3, date }) => {
   });
   worksheet.getRow(4).font = fontH;
   worksheet.getRow(5).font = fontH;
+  worksheet.getRow(4).alignment = alignH;
+  worksheet.getRow(5).alignment = alignH;
   worksheet.getRow(7).font = { size: 13, bold: true };
   worksheet.getRow(7).alignment = { vertical: "middle", horizontal: "center" };
 
