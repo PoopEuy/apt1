@@ -3,23 +3,25 @@ const Validator = require("fastest-validator");
 const v = new Validator();
 
 module.exports = async (req, res) => {
-  const nojs = req.body.nojs;
-  const site = req.body.site;
-  const provinsi = req.body.provinsi;
-  const lc = req.body.lc;
-  const mitra = req.body.mitra;
-  const ip = req.body.ip;
-  const latitude = req.body.latitude;
-  const longitude = req.body.longitude;
-  const id_lvd_vsat = req.body.id_lvdvsat;
-  const id_ping = req.body.id_ping;
-  const id_batt_volt = req.body.id_batvolt;
-  const id_vsat_curr = req.body.id_vsatcurr;
-  const id_bts_curr = req.body.id_btscurr;
-  const gs = req.body.gs;
-  const darat = req.body.darat;
-  const laut = req.body.laut;
-  const udara = req.body.udara;
+  const {
+    nojs,
+    site,
+    provinsi,
+    lc,
+    mitra,
+    ip,
+    latitude,
+    longitude,
+    id_lvd_vsat,
+    id_ping,
+    id_batt_volt,
+    id_vsat_curr,
+    id_bts_curr,
+    gs,
+    darat,
+    laut,
+    udara,
+  } = req.body;
 
   const schema = {
     nojs: "string|empty:false",
@@ -66,13 +68,18 @@ module.exports = async (req, res) => {
     laut,
     udara,
   };
-
-  const createdNojs = await nojsUserModel.create(data);
-
-  return res.status(201).json({
-    status: "success",
-    data: {
-      id: createdNojs.id,
-    },
-  });
+  try {
+    const createdNojs = await nojsUserModel.create(data);
+    return res.status(201).json({
+      status: "success",
+      data: {
+        id: createdNojs.id,
+      },
+    });
+  } catch (e) {
+    return res.status(409).json({
+      status: "error",
+      message: e,
+    });
+  }
 };

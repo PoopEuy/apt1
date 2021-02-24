@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
   const site = req.query.site;
   const attributes = nojsUserModel.attributes();
   if (!site) {
-    const temp = { attributes, where: query };
+    const temp = { attributes, where: query, order: [["site", "ASC"]] };
 
     await nojsUserModel
       .findAll(temp)
