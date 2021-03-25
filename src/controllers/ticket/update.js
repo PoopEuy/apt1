@@ -1,4 +1,5 @@
-const { ticketModel } = require("../../models");
+const { ticketModel, progressModel } = require("../../models");
+const { Op } = require("sequelize");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
@@ -9,6 +10,17 @@ module.exports = async (req, res) => {
     return res.status(404).json({
       status: "error",
       message: "ticket not found",
+    });
+  }
+
+  const temp = await progressModel.findOne({
+    where: { [Op.and]: [{ ticket_id: id }, { status: false }] },
+  });
+
+  if (temp) {
+    return res.status(409).json({
+      status: "error",
+      message: "Progress belum selesai",
     });
   }
 

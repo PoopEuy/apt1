@@ -1,16 +1,16 @@
-const { ticketModel } = require("../../models");
+const { progressModel } = require("../../models");
 
 module.exports = async (req, res) => {
   const id = req.params.id;
 
-  await ticketModel
+  await progressModel
     .destroy({ where: { id } })
     .then((result) => {
       console.log(result);
       return res.json({
         status: "success",
         data: {
-          message: "Ticket Delete",
+          message: "Progress Delete",
           id: id,
         },
       });

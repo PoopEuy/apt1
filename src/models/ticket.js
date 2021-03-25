@@ -7,18 +7,13 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      this.belongsTo(models.nojsUserModel, {
-        foreignKey: "nojs_id",
-        as: "nojs",
-      });
-    }
+    static associate(models) {}
   }
   Ticket.init(
     {
-      nojs_id: DataTypes.INTEGER,
       note: DataTypes.STRING,
-      status: DataTypes.STRING,
+      status: DataTypes.BOOLEAN,
+      site: DataTypes.STRING,
     },
     {
       sequelize,
