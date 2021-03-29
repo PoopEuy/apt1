@@ -33,20 +33,23 @@ const sum = (arr, param, fix = 0) => {
 
 const dataMaping = (datas, date) => {
   let uptime = 0;
+  let real = 0;
   let result = [];
   let totalDateSec = millisToSec(date.start, date.end);
   for (let i = 0; i < datas.length; i++) {
     let res = formaterSla(datas[i]);
     const tempTs = datas[i + 1] ? datas[i + 1].ts : res.ts;
     const second = millisToSec(res.ts, tempTs);
-    uptime += second;
+    const duration = second > 300 ? 300 : second;
     const lvd1 = res.vsat_curr > 0 ? res.batt_volt : 0;
     const lvd2 = res.bts_curr > 0 ? res.batt_volt : 0;
+    uptime += duration;
+    real += second;
     res = {
       ...res,
       lvd1,
       lvd2,
-      duration: second > 300 ? 300 : second,
+      duration,
       real: second,
     };
     result.push(res);
