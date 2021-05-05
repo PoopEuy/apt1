@@ -55,7 +55,7 @@ const dataMaping = (datas, date) => {
     result.push(res);
   }
   const uptimePercent = ((uptime / totalDateSec) * 100).toFixed(2);
-  const sumBattVolt = sum(result, "batt_volt");
+  const sumBattVolt = result.map((e) => e.batt_volt).length;
   const avg = {
     up_time: secToString(uptime),
     unknown_time: secToString(totalDateSec - uptime),
