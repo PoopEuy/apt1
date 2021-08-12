@@ -56,6 +56,9 @@ const dataMaping = (datas, date) => {
   }
   const uptimePercent = ((uptime / totalDateSec) * 100).toFixed(2);
   const sumBattVolt = result.map((e) => e.batt_volt).length;
+  const avgBattvolt = +average(result, "batt_volt", 2);
+  const avgVsatCurr = +average(result, "vsat_curr", 2);
+  const avgBtsCurr = +average(result, "bts_curr", 2);
   const avg = {
     up_time: secToString(uptime),
     unknown_time: secToString(totalDateSec - uptime),
@@ -64,11 +67,12 @@ const dataMaping = (datas, date) => {
     eh1: sum(result, "eh1"),
     eh2: sum(result, "eh2"),
     eh3: sum(result, "eh3"),
-    batt_volt: average(result, "batt_volt", 2),
+    batt_volt: avgBattvolt,
     edl1: sum(result, "edl1"),
     edl2: sum(result, "edl2"),
-    vsat_curr: average(result, "vsat_curr", 2),
-    bts_curr: average(result, "bts_curr", 2),
+    vsat_curr: avgVsatCurr,
+    bts_curr: avgBtsCurr,
+    watt: ((avgVsatCurr + avgBtsCurr) * avgBattvolt).toFixed(1),
     duration: uptime,
     secend: totalDateSec,
   };
@@ -81,7 +85,7 @@ const sla = (datas, date) => {
 
 const sla2 = (datas, date, nojs) => {
   const data = dataMaping(datas, date);
-  const fiveMinutestoDaily = group(data.log);
+  const fiveMinutestoDaily = group(data.log, 10);
   const dailys = [];
   fiveMinutestoDaily.forEach((log) => {
     const duration = sum(log.data, "duration");
@@ -98,6 +102,8 @@ const sla2 = (datas, date, nojs) => {
       eh3: sum(log.data, "eh3"),
       edl1: sum(log.data, "edl1"),
       edl2: sum(log.data, "edl2"),
+      lvd1: average(log.data, "lvd1", 2),
+      lvd2: average(log.data, "lvd2", 2),
       // duration,
     };
     dailys.push(newData);
@@ -105,4 +111,30 @@ const sla2 = (datas, date, nojs) => {
   return dailys;
 };
 
-module.exports = { sla, sla2 };
+const dataHour = (datas, date, nojs) => {
+  const data = dataMaping(datas, date);
+  const fiveMinutestoHour = group(data.log, 13);
+  const hours = fiveMinutestoHour.map((log) => {
+    const duration = sum(log.data, "duration");
+    return {
+      nojs: nojs.nojs,
+      site: nojs.site,
+      date: `${log.date}:00:00`,
+      up_time: secToString(duration),
+      batt_volt: average(log.data, "batt_volt", 2),
+      vsat_curr: average(log.data, "vsat_curr", 2),
+      bts_curr: average(log.data, "bts_curr", 2),
+      eh1: sum(log.data, "eh1"),
+      eh2: sum(log.data, "eh2"),
+      eh3: sum(log.data, "eh3"),
+      edl1: sum(log.data, "edl1"),
+      edl2: sum(log.data, "edl2"),
+      lvd1: average(log.data, "lvd1", 2),
+      lvd2: average(log.data, "lvd2", 2),
+    };
+  });
+
+  return hours;
+};
+
+module.exports = { sla, sla2, dataHour };
