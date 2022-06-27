@@ -12,6 +12,7 @@ const hexToBin = require("../../helpers/hexToBin");
 const { now, tsFormater } = require("../../helpers/dateTime");
 
 const findNojs = async (nojs) => {
+  console.log("masuk find nojs");
   return await nojsUserModel
     .findOne({
       where: { nojs },
@@ -20,6 +21,7 @@ const findNojs = async (nojs) => {
     .catch((err) => err);
 };
 const serviceCall = async (nojsId, value) => {
+  console.log("masuk ceckService");
   const ceckService = await serviceCallModel.findOne({
     where: { nojs_id: nojsId, status: "OPEN" },
   });
@@ -59,11 +61,15 @@ const dataToFormatDb = async (datas) => {
       cpu_temp: el.cpu_temp,
       load1: el.load1,
       load2: el.load2,
+      load3: el.load3,
+      bspwatt: el.bspwatt,
+      mcb_voltage: el.mcb_voltage,
       ts: el.ts,
     };
     const energy = {
       edl1: el.edl1,
       edl2: el.edl2,
+      edl3: el.edl3,
       eh1: el.eh1,
       eh2: el.eh2,
       eh3: el.eh3,
@@ -91,6 +97,7 @@ const dataToFormatDb = async (datas) => {
 };
 
 module.exports = async (req, res) => {
+  console.log("tes create db");
   let logger = [];
   const { status, nojs } = req.body;
   const nojs_id = await findNojs(nojs).then((result) => result);
@@ -102,6 +109,7 @@ module.exports = async (req, res) => {
   }
 
   if (status == "success") {
+    console.log("masuk sukses");
     const dataBody = await dataToFormatDb(req.body.data);
     for (const el in dataBody) {
       if (dataBody.hasOwnProperty(el)) {

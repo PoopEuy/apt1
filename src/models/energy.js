@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       edl1: DataTypes.FLOAT,
       edl2: DataTypes.FLOAT,
+      edl3: DataTypes.FLOAT,
       eh1: DataTypes.FLOAT,
       eh2: DataTypes.FLOAT,
       eh3: DataTypes.FLOAT,

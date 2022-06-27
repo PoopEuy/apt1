@@ -1,6 +1,7 @@
 const { energyModel } = require("../../models");
 
 module.exports = async (req, res) => {
+  console.log("energi masuk");
   const data = ({ edl1, edl2, eh1, eh2, eh3 } = req.body);
 
   energyModel

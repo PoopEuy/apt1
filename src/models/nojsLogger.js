@@ -88,7 +88,15 @@ module.exports = (sequelize, DataTypes) => {
 
     static async sla(modeles, dateTime, nojs) {
       return await this.findAll({
-        attributes: ["ts", "batt_volt", "dock_active", "load1", "load2"],
+        attributes: [
+          "ts",
+          "batt_volt",
+          "dock_active",
+          "load1",
+          "load2",
+          "load3",
+          "bspwatt",
+        ],
         where: {
           nojs_id: nojs,
           ts: { [Op.between]: [dateTime.start, dateTime.end] },
@@ -126,10 +134,13 @@ module.exports = (sequelize, DataTypes) => {
       dock_active: DataTypes.STRING,
       load1: DataTypes.FLOAT,
       load2: DataTypes.FLOAT,
+      load3: DataTypes.FLOAT,
       dock_cell_id: DataTypes.INTEGER,
       energy_id: DataTypes.INTEGER,
       statistics_id: DataTypes.INTEGER,
       pv_id: DataTypes.INTEGER,
+      bspwatt: DataTypes.INTEGER,
+      mcb_voltage: DataTypes.FLOAT,
       createdAt: {
         type: DataTypes.DATE,
         field: "created_at",

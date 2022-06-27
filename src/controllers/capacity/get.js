@@ -1,6 +1,7 @@
 const { capacityModel, nojsUserModel } = require("../../models");
 
 module.exports = async (req, res) => {
+  console.log("masuk tes");
   capacityModel
     .findAll({
       include: [
