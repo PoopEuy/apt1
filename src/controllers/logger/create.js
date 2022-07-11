@@ -64,6 +64,9 @@ const dataToFormatDb = async (datas) => {
       load3: el.load3,
       bspwatt: el.bspwatt,
       mcb_voltage: el.mcb_voltage,
+      rxlevel: el.rxlevel,
+      plpfill: el.plpfill,
+      sync: el.sync,
       ts: el.ts,
     };
     const energy = {

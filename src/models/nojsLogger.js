@@ -141,6 +141,9 @@ module.exports = (sequelize, DataTypes) => {
       pv_id: DataTypes.INTEGER,
       bspwatt: DataTypes.INTEGER,
       mcb_voltage: DataTypes.FLOAT,
+      rxlevel: DataTypes.INTEGER,
+      plpfill: DataTypes.INTEGER,
+      sync: DataTypes.INTEGER,
       createdAt: {
         type: DataTypes.DATE,
         field: "created_at",

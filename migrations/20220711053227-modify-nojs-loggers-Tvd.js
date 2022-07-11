@@ -9,20 +9,19 @@ module.exports = {
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
     return Promise.all([
-      queryInterface.addColumn("energy", "edl3", {
-        type: Sequelize.FLOAT,
+      queryInterface.addColumn("nojs_loggers", "rxlevel", {
+        type: Sequelize.INTEGER,
         allowNull: true,
       }),
-      queryInterface.addColumn("energy", "eh3", {
-        type: Sequelize.FLOAT,
+      queryInterface.addColumn("nojs_loggers", "plpfill", {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      }),
+      queryInterface.addColumn("nojs_loggers", "sync", {
+        type: Sequelize.INTEGER,
         allowNull: true,
       }),
     ]);
-    // return queryInterface;.addColumn(
-    //   "nojs_loggers",
-    //   "load3",
-    //   Sequelize.FLOAT
-    // )
   },
 
   down: async (queryInterface, Sequelize) => {
