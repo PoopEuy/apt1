@@ -25,11 +25,10 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    return Promise.all([
+      queryInterface.removeColumn("nojs_loggers", "rxlevel"),
+      queryInterface.removeColumn("nojs_loggers", "plpfill"),
+      queryInterface.removeColumn("nojs_loggers", "sync"),
+    ]);
   },
 };
